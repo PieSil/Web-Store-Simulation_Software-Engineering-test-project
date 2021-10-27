@@ -1,5 +1,4 @@
 package com.company.store;
-
 import java.util.Map;
 import java.util.HashMap;
 
@@ -14,9 +13,13 @@ public class ShippingDepartment {
             instance = new ShippingDepartment();
         return instance;
     }
+    //TODO: implement createShipment and modify createService
+    void createService(String service) {
+        ShipmentFactory.getInstance().factoryMethod(service, createShipment());
+    }
 
-    void createService() {
-
+    Shipment createShipment() {
+        return new Shipment("a", "b", "c", "d", "e", "1");
     }
 
     void deleteService() {

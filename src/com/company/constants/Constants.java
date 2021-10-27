@@ -8,4 +8,8 @@ public class Constants {
 
     //shipment states
     public static final String INITIAL_STATE = "Shipment created";
+
+    //type of services
+    public static final String STANDARD = "Standard";
+    public static final String PREMIUM = "Premium";
 }
