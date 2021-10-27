@@ -3,7 +3,7 @@ import com.company.constants.Constants;
 
 public class Shipment {
 
-    Shipment(String sender, String receiver, String senderAddress, String destinationAddress, String contents, int id) {
+    Shipment(String sender, String receiver, String senderAddress, String destinationAddress, String contents, String id) {
         this.sender = sender;
         this.receiver = receiver;
         this.senderAddress = senderAddress;
@@ -12,35 +12,35 @@ public class Shipment {
         this.id = id;
     }
 
-    public void SetState(String state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public String GetSender() {
+    public String getSender() {
         return sender;
     }
 
-    public String GetReceiver() {
+    public String getReceiver() {
         return receiver;
     }
 
-    public String GetSenderAddress() {
+    public String getSenderAddress() {
         return senderAddress;
     }
 
-    public String GetDestinationAddress() {
+    public String getDestinationAddress() {
         return destinationAddress;
     }
 
-    public String GetContents() {
+    public String getContents() {
         return contents;
     }
 
-    public int GetId() {
+    public String getId() {
         return id;
     }
 
-    public String GetState() {
+    public String getState() {
         return state;
     }
 
@@ -49,6 +49,6 @@ public class Shipment {
     private String senderAddress;
     private String destinationAddress;
     private String contents;
-    private int id;
+    private String id;
     private String state = Constants.INITIAL_STATE;
 }

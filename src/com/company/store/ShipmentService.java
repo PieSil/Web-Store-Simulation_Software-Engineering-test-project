@@ -7,22 +7,22 @@ public abstract class ShipmentService {
         this.shipment = shipment;
     }
 
-    public void UpdateShipmentState() {
+    public void updateShipmentState() {
 
     }
 
-    void ChangeAddress() {
+    void changeAddress() {
 
     }
 
-    void CreateReturn() {
+    void createReturn() {
 
     }
 
-    void RequestCourier() {
+    void requestCourier() {
 
     }
 
-    private int priority;
-    private Shipment shipment;
+    private final int priority;
+    private final Shipment shipment;
 }
