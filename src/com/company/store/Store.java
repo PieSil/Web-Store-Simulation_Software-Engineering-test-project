@@ -2,23 +2,19 @@ package com.company.store;
 
 public class Store {
 
-    public OperationResult requestCancel() {
+    public void requestCancel() {
 
-        return new OperationResult(true);
     }
 
-    public OperationResult requestAddressChange() {
+    public void requestAddressChange() {
 
-        return new OperationResult(true);
     }
 
-    public OperationResult requestReturn() {
+    public void requestReturn() {
 
-        return new OperationResult(true);
     }
 
-    public OperationResult requestPurchase() {
+    public void requestPurchase() {
 
-        return new OperationResult(true);
     }
 }

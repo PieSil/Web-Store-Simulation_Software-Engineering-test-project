@@ -5,7 +5,7 @@ import com.company.mvc.View;
 import java.util.List;
 import java.util.LinkedList;
 
-public class CustomerView implements View {
+public final class CustomerView implements View {
 
     public CustomerView(String textField) {
         this.topText = textField;
@@ -28,20 +28,6 @@ public class CustomerView implements View {
     public void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-    }
-
-    private void readButtons() {
-
-        for (int index = 0; index < buttons.size(); index++) {
-            if (index == currentButtonIndex) {
-                contents.append("->");
-            }
-
-            Button button = buttons.get(index);
-            contents.append("[");
-            contents.append(button.getText());
-            contents.append("]\n");
-        }
     }
 
     public void moveUp() {
@@ -72,20 +58,34 @@ public class CustomerView implements View {
         buttons.add(button);
     }
 
-    private void readTopText() {
-        if (topText != null) {
-            contents.append(topText).append("\n");
-        }
-    }
-
-    public void readContents() {
+    private void readContents() {
         contents.setLength(0);
         readTopText();
         readButtons();
         readWarning();
     }
 
-    public void readWarning() {
+    private void readTopText() {
+        if (topText != null) {
+            contents.append(topText).append("\n");
+        }
+    }
+
+    private void readButtons() {
+
+        for (int index = 0; index < buttons.size(); index++) {
+            if (index == currentButtonIndex) {
+                contents.append("->");
+            }
+
+            Button button = buttons.get(index);
+            contents.append("[");
+            contents.append(button.getText());
+            contents.append("]\n");
+        }
+    }
+
+    private void readWarning() {
         contents.append(warning);
     }
 

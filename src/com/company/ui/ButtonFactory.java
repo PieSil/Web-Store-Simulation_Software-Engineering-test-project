@@ -5,7 +5,7 @@ import com.company.constants.ViewIdentifier;
 import com.company.factory.Factory;
 import com.company.constants.Constants;
 
-public class ButtonFactory implements Factory {
+public final class ButtonFactory implements Factory {
     private ButtonFactory() {
 
     }
@@ -17,7 +17,7 @@ public class ButtonFactory implements Factory {
     }
 
     @Override
-    public Object factoryMethod(Object... params) {
+    public Button factoryMethod(Object... params) {
         //params[0] = ButtonIdentifier
         //paras[1] = ViewIdentifier - for BACK button only
 
@@ -26,22 +26,22 @@ public class ButtonFactory implements Factory {
         if (params[0] instanceof ButtonIdentifier) {
 
             ButtonIdentifier requestedButton = (ButtonIdentifier) params[0];
-             switch (requestedButton) {
-                 case BACK:
-                     if (params[1] instanceof ViewIdentifier) {
-                         newButton = createBackButton((ViewIdentifier)params[1]);
-                     } else {
-                         //TODO: throw exception
-                     }
-                     break;
+            switch (requestedButton) {
+                case BACK:
+                    if (params[1] instanceof ViewIdentifier) {
+                        newButton = createBackButton((ViewIdentifier) params[1]);
+                    } else {
+                        //TODO: throw exception
+                    }
+                    break;
 
-                 case CATALOG:
-                     newButton = createCatalogButton();
-                     break;
+                case CATALOG:
+                    newButton = createCatalogButton();
+                    break;
 
-                 default:
-                     //TODO: throw exception
-             }
+                default:
+                    //TODO: throw exception
+            }
         } else {
             //TODO: throw exception
         }

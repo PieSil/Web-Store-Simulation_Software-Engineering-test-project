@@ -6,7 +6,7 @@ import com.company.constants.ViewIdentifier;
 import com.company.factory.Factory;
 import com.company.mvc.View;
 
-public class ViewFactory implements Factory {
+public final class ViewFactory implements Factory {
 
     private ViewFactory() {
 
@@ -19,13 +19,13 @@ public class ViewFactory implements Factory {
     }
 
     @Override
-    public Object factoryMethod(Object... params) {
+    public View factoryMethod(Object... params) {
         //params[0] = ViewIdentifier
 
         View newView = null;
 
         if (params[0] instanceof ViewIdentifier) {
-            ViewIdentifier requestedView = (ViewIdentifier)params[0];
+            ViewIdentifier requestedView = (ViewIdentifier) params[0];
             switch (requestedView) {
 
                 case HOME:
