@@ -24,13 +24,13 @@ public final class CustomerController implements Controller {
             if (currentView != null) {
                 String key = scanner.nextLine();
 
-                if (key.equals("p") | key.equals("P")) {
+                if (key.equalsIgnoreCase("p")) {
                     checkButton(currentView.getCurrentButton());
-                } else if (key.equals("u") | key.equals("U")) {
+                } else if (key.equalsIgnoreCase("u")) {
                     moveUp();
-                } else if (key.equals("d") | key.equals("D")) {
+                } else if (key.equalsIgnoreCase("d")) {
                     moveDown();
-                } else if (key.equals("e") | key.equals("E")) {
+                } else if (key.equalsIgnoreCase("e")) {
                     active = false;
                 }
             } else {
@@ -66,10 +66,130 @@ public final class CustomerController implements Controller {
                     //TODO: throw exception
                 }
                 break;
+
+            case REGISTER:
+                scanRegister();
+                break;
+
+            case LOGIN:
+                scanLogin();
+                break;
+
+            case LOG_OUT:
+                logOut();
+                break;
+
             case CHANGE_ADDRESS:
                 break;
             default:
         }
+    }
+
+    private void scanLogin() {
+        //LoginView loginView = LoginView.getInstance();
+        //loginView.emailView();
+
+        currentView.setWarning("Per effettuare il Login inserire la mail utilizzata durante la registrazione al sito.");
+        currentView.refreshWarning();
+
+        //String email = scanner.nextLine();
+
+        String email = getText();
+
+        //loginView.passwordView();
+
+        currentView.setWarning("Per effettuare il login inserire la password.");
+        currentView.refreshWarning();
+
+        //String password = scanner.nextLine();
+
+        String password = getText();
+        ViewIdentifier nextView;
+
+        int success = userDepartment.loginUser(email, password);
+        if (success == 0) {
+            //loginView.accessDenied();
+
+            currentView.setWarning("Email o Password errata, per riprovare premere p.");
+            currentView.refreshWarning();
+            nextView = ViewIdentifier.START;
+
+        } else {
+
+            currentView.setWarning("Login riuscito, digitare 'p' continuare.");
+            currentView.refreshWarning();
+            currentUser = email;
+            views.get(ViewIdentifier.HOME).setTopText("Ciao " + currentUser + " benvenuto su Pippo.com");
+            nextView = ViewIdentifier.HOME;
+
+            //loginView.accessGranted();
+
+            currentUser = email;
+        }
+
+        String input = "";
+        while (!input.equalsIgnoreCase("p")) {
+            input = scanner.nextLine();
+        }
+
+        selectView(nextView);
+
+        //nextView(currentView.currentState());
+    }
+
+    private void scanRegister() {
+        //RegisterView registerView = RegisterView.getInstance();
+
+        //registerView.emailView();
+
+        currentView.setWarning("Inserire una mail: ");
+        currentView.refreshWarning();
+
+        //String email = scanner.nextLine();
+
+        String email = getText();
+
+        //registerView.passwordView();
+
+        currentView.setWarning("Inserire una password: ");
+        currentView.refreshWarning();
+
+        //String password = scanner.nextLine();
+
+        String password = getText();
+
+        int success = userDepartment.registerUser(email, password);
+        if (success == 0) {
+            //registerView.accessDenied();
+
+            currentView.setWarning("Email o Password errata, per riprovare digitare 'p'.");
+            currentView.refreshWarning();
+            //nextView =
+
+        } else {
+            //registerView.accessGranted();
+
+            currentView.setWarning("Account creato, digitare 'p' continuare.");
+            currentView.refreshWarning();
+        }
+
+        String input = "";
+        while (!input.equalsIgnoreCase("p")) {
+            input = scanner.nextLine();
+        }
+
+        ViewIdentifier nextView = ViewIdentifier.START;
+
+        //nextView(currentView.currentState());
+
+        selectView(nextView);
+    }
+
+    private void logOut() {
+        if (currentUser != null) {
+            currentUser = null;
+        }
+        selectView(ViewIdentifier.START);
     }
     
     private String getText() {
@@ -100,6 +220,8 @@ public final class CustomerController implements Controller {
         }
     }
 
+    private String currentUser = null;
+    private final UserDepartment userDepartment = UserDepartment.getInstance();
     private boolean active = true;
     private CustomerView currentView = null;
     private final Map<ViewIdentifier, CustomerView> views = new HashMap<>();

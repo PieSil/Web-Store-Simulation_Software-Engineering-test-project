@@ -1,5 +1,6 @@
 package com.company.ui;
 
+import com.company.constants.ButtonEvent;
 import com.company.constants.ButtonIdentifier;
 import com.company.constants.ViewIdentifier;
 import com.company.factory.Factory;
@@ -35,6 +36,18 @@ public final class ButtonFactory implements Factory {
                     }
                     break;
 
+                case REGISTER:
+                    newButton = createRegisterButton();
+                    break;
+
+                case LOGIN:
+                    newButton = createLoginButton();
+                    break;
+
+                case LOG_OUT:
+                    newButton = createLogoutButton();
+                    break;
+
                 case CATALOG:
                     newButton = createCatalogButton();
                     break;
@@ -54,9 +67,24 @@ public final class ButtonFactory implements Factory {
         return newBackButton;
     }
 
+    private Button createLogoutButton() {
+        Button newLogoutButton = new Button(ButtonEvent.LOG_OUT, "LOG OUT");
+        return newLogoutButton;
+    }
+
     private NavigationButton createCatalogButton() {
         NavigationButton newCatalogButton = new NavigationButton(Constants.TO_CATALOG_TEXT, ViewIdentifier.CATALOG);
         return newCatalogButton;
+    }
+
+    private Button createLoginButton() {
+        Button newLoginButton = new Button(ButtonEvent.LOGIN, "LOGIN");
+        return newLoginButton;
+    }
+
+    private Button createRegisterButton() {
+        Button newRegisterButton = new Button(ButtonEvent.REGISTER, "REGISTER");
+        return newRegisterButton;
     }
 
     private static ButtonFactory instance = null;

@@ -1,5 +1,5 @@
 package com.company.constants;
 
 public enum ButtonIdentifier {
-    BACK, CATALOG, CART, HISTORY
+    BACK, LOG_OUT, CATALOG, CART, HISTORY, LOGIN, REGISTER, HOME
 }

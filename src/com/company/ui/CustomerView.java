@@ -19,6 +19,13 @@ public final class CustomerView implements View {
         render();
     }
 
+    public void refreshWarning() {
+        clear();
+        contents.setLength(0);
+        readWarning();
+        render();
+    }
+
     @Override
     public void render() {
         System.out.println(contents);
@@ -40,15 +47,6 @@ public final class CustomerView implements View {
         if (currentButtonIndex < buttons.size() - 1) {
             currentButtonIndex++;
         }
-    }
-
-
-    public void setWarning(String warning) {
-        this.warning = warning;
-    }
-
-    public Button getCurrentButton() {
-        return buttons.get(currentButtonIndex);
     }
 
     public void addButton(Button button) {
@@ -86,12 +84,26 @@ public final class CustomerView implements View {
     }
 
     private void readWarning() {
-        contents.append(warning);
+        contents.append(warning).append("\n");
+        warning = "";
     }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
+
+    public void setTopText(String topText) {
+        this.topText = topText;
+    }
+
+    public Button getCurrentButton() {
+        return buttons.get(currentButtonIndex);
+    }
+
 
     private int currentButtonIndex = -1;
     private final List<Button> buttons = new LinkedList<>();
     private final StringBuilder contents = new StringBuilder();
-    private final String topText;
+    private String topText;
     private String warning = "";
 }

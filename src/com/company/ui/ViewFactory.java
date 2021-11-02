@@ -28,6 +28,10 @@ public final class ViewFactory implements Factory {
             ViewIdentifier requestedView = (ViewIdentifier) params[0];
             switch (requestedView) {
 
+                case START:
+                    newView = createStartView();
+                    break;
+
                 case HOME:
                     newView = createHomeView();
                     break;
@@ -45,9 +49,17 @@ public final class ViewFactory implements Factory {
         return newView;
     }
 
+    CustomerView createStartView() {
+        CustomerView newStartView = new CustomerView("Welcome to Pippo.com");
+        newStartView.addButton( ButtonFactory.getInstance().factoryMethod(ButtonIdentifier.REGISTER));
+        newStartView.addButton( ButtonFactory.getInstance().factoryMethod(ButtonIdentifier.LOGIN));
+        return newStartView;
+    }
+
     CustomerView createHomeView() {
         CustomerView newHomeView = new CustomerView(Constants.HOME_TOP_TEXT);
         newHomeView.addButton((Button) ButtonFactory.getInstance().factoryMethod(ButtonIdentifier.CATALOG));
+        newHomeView.addButton(ButtonFactory.getInstance().factoryMethod(ButtonIdentifier.LOG_OUT));
         return newHomeView;
     }
 
