@@ -1,4 +1,6 @@
 package com.company.constants;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Constants {
 
@@ -7,7 +9,10 @@ public class Constants {
     public static final int LOW_PRIORITY = 2;
 
     //shipment states
+    //TODO: define all state
     public static final String INITIAL_STATE = "Shipment created";
+    public static final String ON_GOING_STATE = "On going";
+    public static final List<String> states = List.of(INITIAL_STATE, "On going");
 
     //type of services
     public static final String STANDARD = "Standard";
